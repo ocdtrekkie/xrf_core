@@ -33,6 +33,7 @@ $xrf_admin_id=xrf_mysql_result($xrf_config_result,0,"admin_id");
 $xrf_reg_enabled=xrf_mysql_result($xrf_config_result,0,"reg_enabled");
 $xrf_login_enabled=xrf_mysql_result($xrf_config_result,0,"login_enabled");
 $xrf_vlog_enabled=xrf_mysql_result($xrf_config_result,0,"vlog_enabled");
+$xrf_style_default=xrf_mysql_result($xrf_config_result,0,"style_default");
 
 // Check active
 if ($xrf_active == 0)
@@ -103,5 +104,6 @@ if ($xrf_myid != 0)
 	@$xrf_myuclass=xrf_mysql_result($xrf_userdata_result,0,"uclass");
 	@$xrf_myulevel=xrf_mysql_result($xrf_userdata_result,0,"ulevel");
 	@$xrf_mygetmail=xrf_mysql_result($xrf_userdata_result,0,"getmail");
+	@$xrf_mystylepref=xrf_mysql_result($xrf_userdata_result,0,"style_pref");
 }
 ?>
