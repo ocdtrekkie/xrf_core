@@ -48,13 +48,10 @@ if ($do == "auth")
 				$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Logged in from $xrf_myip.')";
 				mysqli_query($xrf_db, $query);
 			}
-	
-			if ($remme == 1)
-			{
-				setcookie("cookemail", $xrf_myemail, time()+60*60*24*400, "/", $xrf_dbcookie);
-				setcookie("cookpass", $xrf_mypassword, time()+60*60*24*400, "/", $xrf_dbcookie);
-				setcookie("cookid", $xrf_myid, time()+60*60*24*400, "/", $xrf_dbcookie);
-			}
+			
+			setcookie("cookemail", $xrf_myemail, time()+60*60*24*400, "/", $xrf_dbcookie);
+			setcookie("cookpass", $xrf_mypassword, time()+60*60*24*400, "/", $xrf_dbcookie);
+			setcookie("cookid", $xrf_myid, time()+60*60*24*400, "/", $xrf_dbcookie);
 	
 			xrf_go_redir("index.php","Successfully logged in as $xrf_myusername.",2); 
 		}
@@ -83,7 +80,6 @@ else
 		<tr><tdcolspan=\"2\" class=\"sp-header\">Log in!</td></tr>
 		<tr><td><b>Email:</b></td><td><input type=\"text\" name=\"lemail\"></td></tr>
 		<tr><td><b>Password:</b></td><td><input type=\"password\" name=\"lpass\"></td></tr>
-		<tr><td></td><td><input type=\"checkbox\" name=\"remme\">Remember Me</td></tr>
 		</table><p>
 		<input type=\"submit\" value=\"Log in!\"></form><p>
 		Forgot password? <a href=\"forgot_password.php\">Reset here</a>.<br>
