@@ -47,7 +47,7 @@ if($xrf_myid == 0 && isset($_COOKIE['cookid']) && isset($_COOKIE['cookemail']) &
     $xrf_cookid = $_COOKIE['cookid'];
     $xrf_cookemail = $_COOKIE['cookemail'];
     $xrf_cookpass = $_COOKIE['cookpass'];
-	$xrf_cookemail = xrf_mysql_sanitize_string($xrf_cookemail);
+	$xrf_cookemail = mysqli_real_escape_string($xrf_db, $xrf_cookemail);
 
 	$xrf_cookie_query="SELECT * FROM g_users WHERE email='$xrf_cookemail'";
 	$xrf_cookie_result=mysqli_query($xrf_db, $xrf_cookie_query);
