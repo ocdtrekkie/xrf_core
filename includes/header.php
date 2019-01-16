@@ -1,6 +1,6 @@
 <?php
 echo "<html><head><title>$xrf_site_name Account</title>
-<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />
+<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/xrflight/style.css\" />
 </head><body>";
 
 if ($xrf_myid != 0)
