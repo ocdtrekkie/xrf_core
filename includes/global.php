@@ -3,7 +3,7 @@ require_once("includes/variables.php");
 require_once("includes/functions_auth.php");
 require_once("includes/functions_redir.php");
 require_once("includes/functions_sec.php");
-$xrf_auth_version_page = "0.2a";
+$xrf_auth_version_page = "0.3a";
 
 // Guest settings
 $xrf_myid = 0;
@@ -11,15 +11,14 @@ $xrf_myusername = "";
 $xrf_myuclass = "";
 $xrf_myulevel = 1;
 
-$xrf_dbconnect = @mysql_connect("$xrf_dbserver", "$xrf_dbusername", "$xrf_dbpassword") or die(mysql_error());
-@mysql_select_db("$xrf_dbname",$xrf_dbconnect) or die("Could not find database.");
+$xrf_db = @mysqli_connect($xrf_dbserver, $xrf_dbusername, $xrf_dbpassword, $xrf_dbname) or die(mysqli_connect_error());
 
 ob_start();
 session_set_cookie_params(3600*24,'/',$xrf_dbcookie);
 session_start();
 
 $xrf_config_query="SELECT * FROM g_config";
-$xrf_config_result=mysql_query($xrf_config_query);
+$xrf_config_result=mysqli_query($xrf_db, $xrf_config_query);
 
 $xrf_site_name=mysql_result($xrf_config_result,0,"site_name");
 $xrf_site_url=mysql_result($xrf_config_result,0,"site_url");
