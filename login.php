@@ -13,14 +13,6 @@ if ($do == "auth")
 	{
 		$lemail = mysqli_real_escape_string($xrf_db, $_POST['lemail']);
 		$lpass = mysqli_real_escape_string($xrf_db, $_POST['lpass']);
-		if(isset($_POST['remme']))
-		{
-			$remme = 1;
-		}
-		else
-		{
-			$remme = 0;
-		}
 
 		$lpass = xrf_encrypt_password($lpass,$xrf_passwordsalt);
 
