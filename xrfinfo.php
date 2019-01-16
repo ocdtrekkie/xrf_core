@@ -9,6 +9,8 @@ SITEcontact: $xrf_admin_email<br>
 XRFserver: $xrf_server_name<br>
 XRFversion: $xrf_auth_version_db<br>
 XRFlicense: $xrf_site_key<br>
-<b>end XRFinfo</b></p>";
+<b>end XRFinfo</b></p>
+
+<p>PHPversion: " . phpversion() . "</p>";
 
 require_once("includes/footer.php"); ?>
