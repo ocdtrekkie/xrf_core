@@ -6,9 +6,9 @@ $do = $_GET['do'];
 
 if ($do == "change")
 {
-	$curpass=mysql_real_escape_string($_POST['curpass']);
-	$newpass=mysql_real_escape_string($_POST['newpass']);
-	$newpass2=mysql_real_escape_string($_POST['newpass2']);
+	$curpass=mysqli_real_escape_string($xrf_db, $_POST['curpass']);
+	$newpass=mysqli_real_escape_string($xrf_db, $_POST['newpass']);
+	$newpass2=mysqli_real_escape_string($xrf_db, $_POST['newpass2']);
 
 	$curpass = xrf_encrypt_password($curpass,$xrf_passwordsalt);
 	$newpass = xrf_encrypt_password($newpass,$xrf_passwordsalt);
@@ -17,13 +17,13 @@ if ($do == "change")
 	if ($curpass == $xrf_mypassword && $newpass == $newpass2)
 	{
 		$query="UPDATE g_users SET password='$newpass' WHERE id='$xrf_myid'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		
 		if ($xrf_vlog_enabled == 1)
 		{
 			$xrf_myip = getenv("REMOTE_ADDR");
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Password changed for $xrf_myusername by $xrf_myip.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 		xrf_go_redir("index.php","Password changed.",2);
 
@@ -36,7 +36,7 @@ if ($do == "change")
 		{
 			$xrf_myip = getenv("REMOTE_ADDR");
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Password change attempt for $xrf_myusername from $myip failed.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 		xrf_go_redir("change_password.php","Invalid password change.",2);
 	}

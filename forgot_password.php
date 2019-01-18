@@ -6,15 +6,15 @@ $do = $_GET['do'];
 
 if ($do == "reset")
 {
-	$femail=xrf_mysql_sanitize_string($_POST['femail']);
-	$fbirthdate=xrf_mysql_sanitize_string($_POST['fbirthdate']);
+	$femail=mysqli_real_escape_string($xrf_db, $_POST['femail']);
+	$fbirthdate=mysqli_real_escape_string($xrf_db, $_POST['fbirthdate']);
 
 	$newpassraw = xrf_generate_password(16);
 	$newpass = xrf_encrypt_password($newpassraw,$xrf_passwordsalt);
 
 	$query="SELECT * FROM g_users WHERE email='$femail'";
-	$result=mysql_query($query);
-	$tbirthdate=mysql_result($result,$qq,"birthdate");
+	$result=mysqli_query($xrf_db, $query);
+	$tbirthdate=xrf_mysql_result($result,0,"birthdate");
 	if ($fbirthdate == $tbirthdate)
 	{
 		$from = "From: $xrf_admin_email \r\n";
@@ -22,13 +22,13 @@ if ($do == "reset")
 		mail($femail, "$xrf_site_name Password Reset", $mesg, $from);
 		
 		$query="UPDATE g_users SET password='$newpass' WHERE email='$femail'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		
 		if ($xrf_vlog_enabled == 1)
 		{
 			$xrf_myip = getenv("REMOTE_ADDR");
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('0',NOW(),'Password reset for $femail by $xrf_myip.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 		xrf_go_redir("index.php","Password reset. Check your email. You may now log in.",4);
 	}
@@ -38,7 +38,7 @@ if ($do == "reset")
 		{
 			$xrf_myip = getenv("REMOTE_ADDR");
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('0',NOW(),'Password reset attempt for $femail from $xrf_myip failed.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 		xrf_go_redir("forgot_password.php","Invalid reset attempt.",2);
 	}
