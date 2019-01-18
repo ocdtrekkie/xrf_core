@@ -1,4 +1,6 @@
 <?php
+$modfolder=$_GET['modfolder'];
+$modpanel=$_GET['modpanel'];
 require_once("includes/global_req_login.php");
 require_once("includes/header.php");
 require_once("includes/functions_get.php");

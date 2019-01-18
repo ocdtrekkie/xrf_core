@@ -20,25 +20,25 @@ if ($xrf_reg_enabled == 1)
 {
 	if ($do == "register")
 	{
-		$remail = xrf_mysql_sanitize_string($_POST['remail']);
-		$remail2 = xrf_mysql_sanitize_string($_POST['remail2']);
-		$rusername = xrf_mysql_sanitize_string($_POST['rusername']);
-		$rlname = xrf_mysql_sanitize_string($_POST['rlname']);
-		$rfname = xrf_mysql_sanitize_string($_POST['rfname']);
-		$rcompany = xrf_mysql_sanitize_string($_POST['rcompany']);
-		$rmonth = $_POST['rmonth'];
-		$rday = $_POST['rday'];
-		$ryear = $_POST['ryear'];
+		$remail = mysqli_real_escape_string($xrf_db, $_POST['remail']);
+		$remail2 = mysqli_real_escape_string($xrf_db, $_POST['remail2']);
+		$rusername = mysqli_real_escape_string($xrf_db, $_POST['rusername']);
+		$rlname = mysqli_real_escape_string($xrf_db, $_POST['rlname']);
+		$rfname = mysqli_real_escape_string($xrf_db, $_POST['rfname']);
+		$rcompany = mysqli_real_escape_string($xrf_db, $_POST['rcompany']);
+		$rmonth = mysqli_real_escape_string($xrf_db, $_POST['rmonth']);
+		$rday = mysqli_real_escape_string($xrf_db, $_POST['rday']);
+		$ryear = mysqli_real_escape_string($xrf_db, $_POST['ryear']);
 		$rbirthdate = $ryear . "-" . $rmonth . "-" . $rday;
-		$rgender = $_POST['rgender'];
-		$raddress = xrf_mysql_sanitize_string($_POST['raddress']);
-		$rcity = xrf_mysql_sanitize_string($_POST['rcity']);
-		$rstate = xrf_mysql_sanitize_string($_POST['rstate']);
-		$rpostal = xrf_mysql_sanitize_string($_POST['rpostal']);
-		$rcountry = xrf_mysql_sanitize_string($_POST['rcountry']);
-		$rhphone = xrf_mysql_sanitize_string($_POST['rhphone']);
-		$rcphone = xrf_mysql_sanitize_string($_POST['rcphone']);
-		$rwphone = xrf_mysql_sanitize_string($_POST['rwphone']);
+		$rgender = mysqli_real_escape_string($xrf_db, $_POST['rgender']);
+		$raddress = mysqli_real_escape_string($xrf_db, $_POST['raddress']);
+		$rcity = mysqli_real_escape_string($xrf_db, $_POST['rcity']);
+		$rstate = mysqli_real_escape_string($xrf_db, $_POST['rstate']);
+		$rpostal = mysqli_real_escape_string($xrf_db, $_POST['rpostal']);
+		$rcountry = mysqli_real_escape_string($xrf_db, $_POST['rcountry']);
+		$rhphone = mysqli_real_escape_string($xrf_db, $_POST['rhphone']);
+		$rcphone = mysqli_real_escape_string($xrf_db, $_POST['rcphone']);
+		$rwphone = mysqli_real_escape_string($xrf_db, $_POST['rwphone']);
 		if(isset($_POST['rgetmail']))
 		{
 		$rgetmail = 1;
@@ -65,7 +65,7 @@ if ($xrf_reg_enabled == 1)
 
 		if ($regfail != 1)
 		{
-			mysql_query("INSERT INTO g_users (email, username, password, lname, fname, company, birthdate, gender, address, city, state, postal, country, hphone, cphone, wphone, datereg, getmail) VALUES('$remail','$rusername', '$rpassword','$rlname','$rfname','$rcompany','$rbirthdate','$rgender','$raddress','$rcity','$rstate','$rpostal','$rcountry','$rhphone','$rcphone','$rwphone',now(),'$rgetmail')") or die(mysql_error());
+			mysqli_query($xrf_db, "INSERT INTO g_users (email, username, password, lname, fname, company, birthdate, gender, address, city, state, postal, country, hphone, cphone, wphone, datereg, getmail) VALUES('$remail','$rusername', '$rpassword','$rlname','$rfname','$rcompany','$rbirthdate','$rgender','$raddress','$rcity','$rstate','$rpostal','$rcountry','$rhphone','$rcphone','$rwphone',now(),'$rgetmail')") or die(mysqli_error($xrf_db));
 
 			$from = "From: $xrf_admin_email \r\n";
 			mail($remail, "$xrf_site_name Registration Information", "Your account, $rusername is registered and awaiting activation.  Your password is $rpass.  Go to $xrf_site_url to log in.", $from);
