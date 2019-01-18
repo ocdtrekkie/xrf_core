@@ -12,7 +12,7 @@ else
 
 if ($do == "send")
 {
-$scope = xrf_mysql_sanitize_string($_POST['scope']);
+$scope = mysqli_real_escape_string($xrf_db, $_POST['scope']);
 $subject = $_POST['subject'];
 $messagebody = $_POST['messagebody'];
 if(isset($_POST['confirm']))
@@ -39,14 +39,14 @@ $headers .= "Content-type: text/html\r\n";
 $messagebody=xrf_bbcode_format($messagebody);
 
 $query="SELECT * FROM g_users WHERE " . $queryscope;
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
+$result=mysqli_query($xrf_db, $query);
+$num=mysqli_num_rows($result);
 
 $qq=0;
 while ($qq < $num) {
 
-$toid=mysql_result($result,$qq,"id");
-$toemail=mysql_result($result,$qq,"email");
+$toid=xrf_mysql_result($result,$qq,"id");
+$toemail=xrf_mysql_result($result,$qq,"email");
 $unsub="<p>You received this email because you opted-in to receive mail from our site. You may unsubscribe at any time, by clicking <a href=\"$xrf_site_url/unsubscribe.php?email=$toemail\">here</a>.</p>";
 $message=$messagebody . $unsub;
 

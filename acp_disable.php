@@ -12,9 +12,9 @@ else
 if ($do == "trigger")
 {
 $query="UPDATE g_config SET active='0'";
-mysql_query($query);
+mysqli_query($xrf_db, $query);
 $query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Disabled the site from $xrf_myip.')";
-mysql_query($query);
+mysqli_query($xrf_db, $query);
 
 $from = "From: $xrf_admin_email \r\n";
 $mesg = "The site has been disabled by $xrf_myfname $xrf_mylname from $xrf_myip.";

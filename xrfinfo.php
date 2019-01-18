@@ -7,8 +7,10 @@ SITEname: $xrf_site_name<br>
 SITEurl: $xrf_site_url<br>
 SITEcontact: $xrf_admin_email<br>
 XRFserver: $xrf_server_name<br>
-XRFversion: $xrf_auth_version_db<br>
+XRFversion: $xrf_auth_version_db ($xrf_auth_version_page)<br>
 XRFlicense: $xrf_site_key<br>
-<b>end XRFinfo</b></p>";
+<b>end XRFinfo</b></p>
+
+<p>PHPversion: " . phpversion() . "</p>";
 
 require_once("includes/footer.php"); ?>

@@ -1,6 +1,8 @@
 <?php
+if ($xrf_mystylepref == "") {$xrf_style = $xrf_style_default;}
+else {$xrf_style = $xrf_mystylepref;}
 echo "<html><head><title>$xrf_site_name Account</title>
-<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />
+<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/$xrf_style/style.css\" />
 </head><body>";
 
 if ($xrf_myid != 0)

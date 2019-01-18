@@ -1,5 +1,5 @@
 <?php
-$id=(int)$id;
+$id=(int)$_GET['id'];
 require_once("includes/global_req_login.php");
 require_once("includes/header.php");
 
@@ -13,32 +13,30 @@ else
 echo "<b>View User</b><p>";
 
 $query="SELECT * FROM g_users WHERE id = '$id'";
-$result=mysql_query($query);
+$result=mysqli_query($xrf_db, $query);
 
-$num=mysql_numrows($result);
-
-$username=mysql_result($result,$qq,"username");
-$email=mysql_result($result,$qq,"email");
-$lname=mysql_result($result,$qq,"lname");
-$fname=mysql_result($result,$qq,"fname");
-$mname=mysql_result($result,$qq,"mname");
-$company=mysql_result($result,$qq,"company");
-$birthdate=mysql_result($result,$qq,"birthdate");
-$gender=mysql_result($result,$qq,"gender");
-$address=mysql_result($result,$qq,"address");
-$city=mysql_result($result,$qq,"city");
-$state=mysql_result($result,$qq,"state");
-$postal=mysql_result($result,$qq,"postal");
-$country=mysql_result($result,$qq,"country");
-$hphone=mysql_result($result,$qq,"hphone");
-$cphone=mysql_result($result,$qq,"cphone");
-$wphone=mysql_result($result,$qq,"wphone");
-$datereg=mysql_result($result,$qq,"datereg");
-$lastlogin=mysql_result($result,$qq,"lastlogin");
-$lastip=mysql_result($result,$qq,"lastip");
-$uclass=mysql_result($result,$qq,"uclass");
-$ulevel=mysql_result($result,$qq,"ulevel");
-$getmail=mysql_result($result,$qq,"getmail");
+$username=xrf_mysql_result($result,0,"username");
+$email=xrf_mysql_result($result,0,"email");
+$lname=xrf_mysql_result($result,0,"lname");
+$fname=xrf_mysql_result($result,0,"fname");
+$mname=xrf_mysql_result($result,0,"mname");
+$company=xrf_mysql_result($result,0,"company");
+$birthdate=xrf_mysql_result($result,0,"birthdate");
+$gender=xrf_mysql_result($result,0,"gender");
+$address=xrf_mysql_result($result,0,"address");
+$city=xrf_mysql_result($result,0,"city");
+$state=xrf_mysql_result($result,0,"state");
+$postal=xrf_mysql_result($result,0,"postal");
+$country=xrf_mysql_result($result,0,"country");
+$hphone=xrf_mysql_result($result,0,"hphone");
+$cphone=xrf_mysql_result($result,0,"cphone");
+$wphone=xrf_mysql_result($result,0,"wphone");
+$datereg=xrf_mysql_result($result,0,"datereg");
+$lastlogin=xrf_mysql_result($result,0,"lastlogin");
+$lastip=xrf_mysql_result($result,0,"lastip");
+$uclass=xrf_mysql_result($result,0,"uclass");
+$ulevel=xrf_mysql_result($result,0,"ulevel");
+$getmail=xrf_mysql_result($result,0,"getmail");
 
 if ($gender == "m")
 $gen = "Male";

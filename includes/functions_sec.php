@@ -15,7 +15,7 @@ function xrf_mysql_sanitize_string($string)
 if (get_magic_quotes_gpc())
 	$string = stripslashes($string);
 $string = xrf_sanitize_string($string);
-return mysql_real_escape_string($string);
+return mysqli_real_escape_string($xrf_db, $string);
 }
 
 ?>
