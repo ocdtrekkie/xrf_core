@@ -33,16 +33,16 @@ echo "</td><td width=\"50%\">
 <a href=\"acp_modules.php\">Module Manager</a><p>";
 
 $query="SELECT * FROM g_modules WHERE active = 1 ORDER BY ord ASC";
-$result=mysql_query($query);
+$result=mysqli_query($xrf_db, $query);
 
-$num=mysql_numrows($result);
+$num=mysqli_num_rows($result);
 
 $qq=0;
 while ($qq < $num) {
 
-$modid=mysql_result($result,$qq,"id");
-$modname=mysql_result($result,$qq,"name");
-$modfolder=mysql_result($result,$qq,"folder");
+$modid=xrf_mysql_result($result,$qq,"id");
+$modname=xrf_mysql_result($result,$qq,"name");
+$modfolder=xrf_mysql_result($result,$qq,"folder");
 
 echo "<p><b>$modname</b></p>";
 

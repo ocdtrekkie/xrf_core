@@ -1,4 +1,5 @@
 <?php
+$filter = $_GET['filter'];
 $condition="";
 $cndlbl="";
 require_once("includes/global_req_login.php");
@@ -27,19 +28,19 @@ if ($cndlbl == "")
 echo "<b>$cndlbl User Accounts</b><p>";
 
 $query="SELECT * FROM g_users$condition ORDER BY lname, fname ASC";
-$result=mysql_query($query);
+$result=mysqli_query($xrf_db, $query);
 
-$num=mysql_numrows($result);
+$num=mysqli_num_rows($result);
 
 echo "<table>";
 $qq=0;
 while ($qq < $num) {
 
-$id=mysql_result($result,$qq,"id");
-$username=mysql_result($result,$qq,"username");
-$lname=mysql_result($result,$qq,"lname");
-$fname=mysql_result($result,$qq,"fname");
-$email=mysql_result($result,$qq,"email");
+$id=xrf_mysql_result($result,$qq,"id");
+$username=xrf_mysql_result($result,$qq,"username");
+$lname=xrf_mysql_result($result,$qq,"lname");
+$fname=xrf_mysql_result($result,$qq,"fname");
+$email=xrf_mysql_result($result,$qq,"email");
 
 echo "<tr><td width=200><a href=\"acp_view_user.php?id=$id\">$username</a> ($id)</td><td width=200>$lname, $fname</td><td width=200>$email</td></tr>";
 $qq++;

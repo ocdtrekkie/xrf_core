@@ -8,11 +8,11 @@ xrf_go_redir("index.php","Invalid permissions.",2);
 }
 else
 {
-$id=(int)$id;
+$id=(int)$_GET['id'];
 $query="SELECT * FROM g_modules WHERE id='$id'";
-$result=mysql_query($query);
+$result=mysqli_query($xrf_db, $query);
 
-$active=mysql_result($result,$qq,"active");
+$active=xrf_mysql_result($result,0,"active");
 if ($active == '1')
 {
 $newset = '0';
@@ -25,7 +25,7 @@ $resultmsg = "activated";
 }
 
 $query="UPDATE g_modules SET active=$newset WHERE id='$id'";
-mysql_query($query);
+mysqli_query($xrf_db, $query);
 xrf_go_redir("acp_modules.php","Module $resultmsg.",2);
 
 }

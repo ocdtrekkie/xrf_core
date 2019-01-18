@@ -11,11 +11,11 @@ else
 
 if ($do == "change")
 {
-	$new_site_name = xrf_mysql_sanitize_string($_POST['site_name']);
-	$new_site_url = xrf_mysql_sanitize_string($_POST['site_url']);
-	$new_site_key = xrf_mysql_sanitize_string($_POST['site_key']);
-	$new_server_name = xrf_mysql_sanitize_string($_POST['server_name']);
-	$new_admin_email = xrf_mysql_sanitize_string($_POST['admin_email']);
+	$new_site_name = mysqli_real_escape_string($xrf_db, $_POST['site_name']);
+	$new_site_url = mysqli_real_escape_string($xrf_db, $_POST['site_url']);
+	$new_site_key = mysqli_real_escape_string($xrf_db, $_POST['site_key']);
+	$new_server_name = mysqli_real_escape_string($xrf_db, $_POST['server_name']);
+	$new_admin_email = mysqli_real_escape_string($xrf_db, $_POST['admin_email']);
 	$new_reg_enabled = $_POST['reg_enabled'];
 	$new_login_enabled = $_POST['login_enabled'];
 	$new_vlog_enabled = $_POST['vlog_enabled'];
@@ -26,67 +26,67 @@ if ($do == "change")
 	if ($new_site_name != $xrf_site_name)
 	{
 		$query = "UPDATE g_config SET site_name = '$new_site_name'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_site_name = $new_site_name;
 		if ($xrf_vlog_enabled == 1)
 		{
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed site name to $new_site_name.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_site_url != $xrf_site_url)
 	{
 		$query = "UPDATE g_config SET site_url = '$new_site_url'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_site_url = $new_site_url;
 		if ($xrf_vlog_enabled == 1)
 		{
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed site URL to $new_site_url.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_site_key != $xrf_site_key)
 	{
 		$query = "UPDATE g_config SET site_key = '$new_site_key'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_site_key = $new_site_key;
 		if ($xrf_vlog_enabled == 1)
 		{
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed site license key.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_server_name != $xrf_server_name)
 	{
 		$query = "UPDATE g_config SET server_name = '$new_server_name'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_server_name = $new_server_name;
 		if ($xrf_vlog_enabled == 1)
 		{
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed server name.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_admin_email != $xrf_admin_email)
 	{
 		$query = "UPDATE g_config SET admin_email = '$new_admin_email'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_admin_email = $new_admin_email;
 		if ($xrf_vlog_enabled == 1)
 		{
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed admin email to $new_admin_email.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_reg_enabled != $xrf_reg_enabled)
 	{
 		$query = "UPDATE g_config SET reg_enabled = '$new_reg_enabled'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_reg_enabled = $new_reg_enabled;
 		if ($xrf_vlog_enabled == 1)
 		{
@@ -95,14 +95,14 @@ if ($do == "change")
 			else
 				$regch = "Disabled";
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'$regch user registration.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_login_enabled != $xrf_login_enabled)
 	{
 		$query = "UPDATE g_config SET login_enabled = '$new_login_enabled'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_login_enabled = $new_login_enabled;
 		if ($xrf_vlog_enabled == 1)
 		{
@@ -111,21 +111,21 @@ if ($do == "change")
 			else
 				$loginch = "Disabled";
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'$loginch user login.')";
-			mysql_query($query);
+			mysqli_query($xrf_db, $query);
 		}
 	}
 	
 	if ($new_vlog_enabled != $xrf_vlog_enabled)
 	{
 		$query = "UPDATE g_config SET vlog_enabled = '$new_vlog_enabled'";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 		$xrf_vlog_enabled = $new_vlog_enabled;
 		if ($new_vlog_enabled == 1)
 			$vlogch = "Enabled";
 		else
 			$vlogch = "Disabled";
 		$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'$vlogch verbose logging.')";
-		mysql_query($query);
+		mysqli_query($xrf_db, $query);
 	}
 	
 	xrf_go_redir("acp.php","Settings changed.",2); 
