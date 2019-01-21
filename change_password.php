@@ -10,12 +10,9 @@ if ($do == "change")
 	$newpass=mysqli_real_escape_string($xrf_db, $_POST['newpass']);
 	$newpass2=mysqli_real_escape_string($xrf_db, $_POST['newpass2']);
 
-	$curpass = xrf_encrypt_password($curpass);
-	$newpass = xrf_encrypt_password($newpass);
-	$newpass2 = xrf_encrypt_password($newpass2);
-
-	if ($curpass == $xrf_mypassword && $newpass == $newpass2)
+	if (password_verify($curpass, $xrf_mypassword) && $newpass == $newpass2)
 	{
+		$newpass = xrf_encrypt_password($newpass);
 		$query="UPDATE g_users SET password='$newpass' WHERE id='$xrf_myid'";
 		mysqli_query($xrf_db, $query);
 		

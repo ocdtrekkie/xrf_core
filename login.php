@@ -14,8 +14,6 @@ if ($do == "auth")
 		$lemail = mysqli_real_escape_string($xrf_db, $_POST['lemail']);
 		$lpass = mysqli_real_escape_string($xrf_db, $_POST['lpass']);
 
-		$lpass = xrf_encrypt_password($lpass);
-
 		$query="SELECT id, password, username FROM g_users WHERE email='$lemail'";
 		$result=mysqli_query($xrf_db, $query);
 
@@ -24,7 +22,7 @@ if ($do == "auth")
 		@$xrf_mypassword=xrf_mysql_result($result,0,"password");
 		@$xrf_myusername=xrf_mysql_result($result,0,"username");
 
-		if ($lpass == $xrf_mypassword)
+		if (password_verify($lpass, $xrf_mypassword))
 		{
 			$_SESSION['xrf_myemail'] = $xrf_myemail;
 			$_SESSION['xrf_mypassword'] = $xrf_mypassword;
