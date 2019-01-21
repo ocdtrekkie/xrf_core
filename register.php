@@ -48,7 +48,7 @@ if ($xrf_reg_enabled == 1)
 		$rgetmail = 0;
 		}
 		$rpass = xrf_generate_password(12);
-		$rpassword = xrf_encrypt_password($rpass, $passwordsalt);
+		$rpassword = xrf_encrypt_password($rpass);
 
 		if ($remail != $remail2)
 		$regfail = 1;

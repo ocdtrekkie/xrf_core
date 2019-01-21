@@ -1,7 +1,7 @@
 <?php
 require_once("includes/global.php");
 require_once("includes/header.php");
-$xrf_auth_version_page = "0.3a";
+$xrf_auth_version_page = "0.3b";
 
 xrf_check_auth_version($xrf_auth_version_page, $xrf_auth_version_db) or die("Unable to verify authentication version.  Please report to the system administrator.");
 
@@ -14,7 +14,7 @@ if ($do == "auth")
 		$lemail = mysqli_real_escape_string($xrf_db, $_POST['lemail']);
 		$lpass = mysqli_real_escape_string($xrf_db, $_POST['lpass']);
 
-		$lpass = xrf_encrypt_password($lpass,$xrf_passwordsalt);
+		$lpass = xrf_encrypt_password($lpass);
 
 		$query="SELECT id, password, username FROM g_users WHERE email='$lemail'";
 		$result=mysqli_query($xrf_db, $query);

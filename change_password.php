@@ -10,9 +10,9 @@ if ($do == "change")
 	$newpass=mysqli_real_escape_string($xrf_db, $_POST['newpass']);
 	$newpass2=mysqli_real_escape_string($xrf_db, $_POST['newpass2']);
 
-	$curpass = xrf_encrypt_password($curpass,$xrf_passwordsalt);
-	$newpass = xrf_encrypt_password($newpass,$xrf_passwordsalt);
-	$newpass2 = xrf_encrypt_password($newpass2,$xrf_passwordsalt);
+	$curpass = xrf_encrypt_password($curpass);
+	$newpass = xrf_encrypt_password($newpass);
+	$newpass2 = xrf_encrypt_password($newpass2);
 
 	if ($curpass == $xrf_mypassword && $newpass == $newpass2)
 	{

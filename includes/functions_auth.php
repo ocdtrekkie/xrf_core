@@ -13,10 +13,10 @@ function xrf_check_auth_version($xrf_auth_version_page, $xrf_auth_version_db)
 }
 
 //Function xrf_encrypt_password
-//Use: Encrypts and salts a password.
-function xrf_encrypt_password($rawpass,$passwordsalt)
+//Use: Encrypts a password.
+function xrf_encrypt_password($rawpass)
 {
-$newpass = sha1(md5($rawpass).$passwordsalt);
+$newpass = password_hash($rawpass, PASSWORD_BCRYPT);
 return ($newpass);
 }
 

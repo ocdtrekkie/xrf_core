@@ -10,7 +10,7 @@ if ($do == "reset")
 	$fbirthdate=mysqli_real_escape_string($xrf_db, $_POST['fbirthdate']);
 
 	$newpassraw = xrf_generate_password(16);
-	$newpass = xrf_encrypt_password($newpassraw,$xrf_passwordsalt);
+	$newpass = xrf_encrypt_password($newpassraw);
 
 	$query="SELECT * FROM g_users WHERE email='$femail'";
 	$result=mysqli_query($xrf_db, $query);

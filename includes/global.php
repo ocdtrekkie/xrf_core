@@ -4,7 +4,7 @@ require_once("includes/functions_auth.php");
 require_once("includes/functions_db.php");
 require_once("includes/functions_redir.php");
 require_once("includes/functions_sec.php");
-$xrf_auth_version_page = "0.3a";
+$xrf_auth_version_page = "0.3b";
 
 // Guest settings
 $xrf_myid = 0;
@@ -26,7 +26,6 @@ $xrf_site_url=xrf_mysql_result($xrf_config_result,0,"site_url");
 $xrf_site_key=xrf_mysql_result($xrf_config_result,0,"site_key");
 $xrf_active=xrf_mysql_result($xrf_config_result,0,"active");
 $xrf_auth_version_db=xrf_mysql_result($xrf_config_result,0,"auth_version");
-$xrf_passwordsalt=xrf_mysql_result($xrf_config_result,0,"salt");
 $xrf_server_name=xrf_mysql_result($xrf_config_result,0,"server_name");
 $xrf_admin_email=xrf_mysql_result($xrf_config_result,0,"admin_email");
 $xrf_admin_id=xrf_mysql_result($xrf_config_result,0,"admin_id");
