@@ -21,13 +21,10 @@ echo "
 <p><b>General Management</b></p>
 <p><a href=\"acp_general.php\">General Configuration</a><br>
 <a href=\"acp_mass_mail.php\">Send Mass Mail</a><br>
-<a href=\"acp_disable.php\">Disable Site</a></p>";
+<a href=\"acp_disable.php\">Disable Site</a><br>
+<a href=\"acp_view_log.php\">View System Log</a></p>
 
-if ($xrf_vlog_enabled == 1)
-echo "<p><b>Log Management</b></p>
-<p>Log Browser Here</p>";
-
-echo "</td><td width=\"50%\">
+</td><td width=\"50%\">
 
 <!-- right side -->
 <a href=\"acp_modules.php\">Module Manager</a><p>";
