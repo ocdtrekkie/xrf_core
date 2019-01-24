@@ -24,7 +24,10 @@ if ($xrf_mywphone != "")
 $mywpl = "Work: ";
 
 if ($xrf_mygetmail == 1)
+{
 $getsmail = "Yes";
+$unsublink = " <font size=\"2\"><a href=\"unsubscribe.php?email=$xrf_myemail\">[Unsubscribe]</a></font>";
+}
 else
 $getsmail = "No";
 
@@ -42,7 +45,7 @@ $address
 <table><tr><td>$myhpl$xrf_myhphone$br1$mycpl$xrf_mycphone$br2$mywpl$xrf_mywphone</td></tr></table><p>
 <table><tr><td>$birthdate
 $mygen</td></tr></table><p>
-<table><tr><td>Receive Email: $getsmail</td></tr></table><p>
+<table><tr><td>Receive Email: $getsmail$unsublink</td></tr></table><p>
 <table><tr><td><b>Actions:</b> <font size=\"2\"><a href=\"change_password.php\">[Change Password]</a></font></td></tr></table>
 
 </td><td width=\"50%\">

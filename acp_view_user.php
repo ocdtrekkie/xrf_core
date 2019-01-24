@@ -60,7 +60,10 @@ if ($wphone != "")
 $wpl = "Work: ";
 
 if ($getmail == 1)
+{
 $getsmail = "Yes";
+$unsublink = " <font size=\"2\"><a href=\"unsubscribe.php?email=$email\">[Unsubscribe]</a></font>";
+}
 else
 $getsmail = "No";
 
@@ -89,7 +92,7 @@ $addr
 <table><tr><td>$hpl$hphone$br1$cpl$cphone$br2$wpl$wphone</td></tr></table><p>
 <table><tr><td>$birth
 $gen</td></tr></table><p>
-<table><tr><td>Receive Email: $getsmail</td></tr></table>
+<table><tr><td>Receive Email: $getsmail$unsublink</td></tr></table>
 
 </td><td width=\"50%\">
 
