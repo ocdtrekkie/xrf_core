@@ -9,6 +9,7 @@ xrf_go_redir("index.php","Invalid permissions.",2);
 else
 {
 
+$do = $_GET['do'];
 if ($do == "change")
 {
 	$new_site_name = mysqli_real_escape_string($xrf_db, $_POST['site_name']);
@@ -22,6 +23,7 @@ if ($do == "change")
 	$new_reg_enabled = (int)$new_reg_enabled;
 	$new_login_enabled = (int)$new_login_enabled;
 	$new_vlog_enabled = (int)$new_vlog_enabled;
+	$new_style_default = mysqli_real_escape_string($xrf_db, $_POST['style_default']);
 	
 	if ($new_site_name != $xrf_site_name)
 	{
@@ -128,6 +130,18 @@ if ($do == "change")
 		mysqli_query($xrf_db, $query);
 	}
 	
+	if ($new_style_default != $xrf_style_default)
+	{
+		$query = "UPDATE g_config SET style_default = '$new_style_default'";
+		mysqli_query($xrf_db, $query);
+		$xrf_style_default = $new_style_default;
+		if ($xrf_vlog_enabled == 1)
+		{
+			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Changed default style to $new_style_default.')";
+			mysqli_query($xrf_db, $query);
+		}
+	}
+	
 	xrf_go_redir("acp.php","Settings changed.",2); 
 }
 else
@@ -144,7 +158,7 @@ else
 		$vlogy = " checked";
 	else
 		$vlogn = " checked";
-	
+
 	echo "
 	<p><b>General Configuration</b></p>
 	<form action=\"acp_general.php?do=change\" method=\"POST\">
@@ -154,9 +168,25 @@ else
 	<tr><td>Site Key:</td><td><input type=\"text\" name=\"site_key\" value=\"$xrf_site_key\" size=\"30\"></td></tr>
 	<tr><td>Server Name:</td><td><input type=\"text\" name=\"server_name\" value=\"$xrf_server_name\" size=\"30\"></td></tr>
 	<tr><td>Admin Email:</td><td><input type=\"text\" name=\"admin_email\" value=\"$xrf_admin_email\" size=\"30\"></td></tr>
-	<tr><td>Registration Enabled:</td><td><input type=\"radio\" name=\"reg_enabled\" value=1$regy> Yes <input type=\"radio\" name=\"reg_enabled\" value=0$regn> No</td></td>
-	<tr><td>Login Enabled:</td><td><input type=\"radio\" name=\"login_enabled\" value=1$logy> Yes <input type=\"radio\" name=\"login_enabled\" value=0$logn> No</td></td>
-	<tr><td>Verbose Logging:</td><td><input type=\"radio\" name=\"vlog_enabled\" value=1$vlogy> On <input type=\"radio\" name=\"vlog_enabled\" value=0$vlogn> Off</td></td>
+	<tr><td>Registration Enabled:</td><td><input type=\"radio\" name=\"reg_enabled\" value=1$regy> Yes <input type=\"radio\" name=\"reg_enabled\" value=0$regn> No</td></tr>
+	<tr><td>Login Enabled:</td><td><input type=\"radio\" name=\"login_enabled\" value=1$logy> Yes <input type=\"radio\" name=\"login_enabled\" value=0$logn> No</td></tr>
+	<tr><td>Verbose Logging:</td><td><input type=\"radio\" name=\"vlog_enabled\" value=1$vlogy> On <input type=\"radio\" name=\"vlog_enabled\" value=0$vlogn> Off</td></tr>
+	<tr><td>Default Style:</td><td><select name=\"style_default\">";
+	
+	$query = "SELECT * FROM g_styles WHERE active = 1";
+	$result = mysqli_query($xrf_db, $query);
+	$num = mysqli_num_rows($result);
+	$qq = 0;
+	while ($qq < $num) {
+		$current = "";
+		$s_name = xrf_mysql_result($result,$qq,"name");
+		$s_descr = xrf_mysql_result($result,$qq,"descr");
+		if ($s_name == $xrf_style_default) $current = "selected";
+		echo "<option value=\"$s_name\" $current>$s_descr</option>";
+		$qq++;
+	}
+	
+	echo "</select></td></tr>
 	</table>
 	<input type=\"submit\" value=\"Submit!\">
 	</form>";
