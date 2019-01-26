@@ -22,6 +22,7 @@ else { alert(fail); return false }
 </script><script src="includes/functions_validate.js"></script>
 <?php
 
+$do = $_GET['do'];
 if ($do == "register")
 {
 $remail = mysqli_real_escape_string($xrf_db, $_POST['remail']);
@@ -53,7 +54,7 @@ $rgetmail = 0;
 }
 $rulevel = mysqli_real_escape_string($xrf_db, $_POST['rulevel']);
 $ruclass = mysqli_real_escape_string($xrf_db, $_POST['ruclass']);
-$rpassword = xrf_encrypt_password($rpassword, $xrf_passwordsalt);
+$rpassword = xrf_encrypt_password($rpassword);
 
 if ($remail == "")
 $regfail = 1;
