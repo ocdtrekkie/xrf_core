@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=iso-8859-15');
 if ($xrf_mystylepref == "") {$xrf_style = $xrf_style_default;}
 else {$xrf_style = $xrf_mystylepref;}
 echo "<html><head><title>$xrf_site_name Account</title>
