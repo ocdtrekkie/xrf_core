@@ -12,3 +12,7 @@ Each module may contain code which is intended to be placed on the root of the s
 
 * PHP 5.6 or better
 * MySQL
+
+## License
+
+XRF Core is currently *not open source* and is copyright Jacob Weisz. Using this software without prior permission is prohibited. Code written by other authors within this project is usable as per the terms under which it was released.
