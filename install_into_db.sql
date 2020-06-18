@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `g_classes` (
 CREATE TABLE IF NOT EXISTS `g_config` (
   `site_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `site_url` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `site_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'License key for OCDTS install.',
+  `site_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'License key for XRF install.',
   `active` int(1) NOT NULL COMMENT 'If 0, disable site',
   `auth_version` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'If module version is not found in this string, disable module',
   `server_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ID of XRF server',
