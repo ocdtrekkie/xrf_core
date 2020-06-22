@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS `g_classes` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `code` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   `desc` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Classifications users can have';
 
 CREATE TABLE IF NOT EXISTS `g_config` (
@@ -37,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `g_modules` (
   `folder` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `ord` int(4) NOT NULL,
   `active` int(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `prefix` (`prefix`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='List of modules and configurations';
 
 CREATE TABLE IF NOT EXISTS `g_styles` (
@@ -45,8 +47,12 @@ CREATE TABLE IF NOT EXISTS `g_styles` (
   `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Short name/identifier of style',
   `descr` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Friendly name of style',
   `active` int(1) NOT NULL DEFAULT '1' COMMENT '0 if disabled, 1 if active',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `prefix` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT IGNORE INTO g_styles (`name`,`descr`) VALUES('xrflight','XRF Light Theme');
+INSERT IGNORE INTO g_styles (`name`,`descr`) VALUES('xrfdark','XRF Dark Theme');
 
 CREATE TABLE IF NOT EXISTS `g_users` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
