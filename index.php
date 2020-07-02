@@ -4,8 +4,10 @@ require_once("includes/header.php");
 
 if ($xrf_mygender == "m")
 $mygen = "Male";
-else
+elseif ($xrf_mygender == "f")
 $mygen = "Female";
+elseif ($xrf_mygender == "n")
+$mygen = "Nonbinary";
 
 if ($xrf_mycompany != "")
 $mycomp = "$xrf_mycompany<br>";

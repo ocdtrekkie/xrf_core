@@ -40,8 +40,10 @@ $getmail=xrf_mysql_result($result,0,"getmail");
 
 if ($gender == "m")
 $gen = "Male";
-else
+elseif ($gender == "f")
 $gen = "Female";
+elseif ($gender == "n")
+$gen = "Nonbinary";
 
 if ($company != "")
 $company = "$company<br>";
