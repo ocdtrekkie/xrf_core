@@ -1,3 +1,5 @@
+Note that the primary focus is now [XRF Core for Sandstorm](https://github.com/ocdtrekkie/xrf_core_sandstorm), and while I may port some compatible adjustments back to this version, it is deprecated at this point.
+
 # XRF Core, Account, and Administration
 
 XRF, which was backronymed into standing for Xtensible Resource Framework, is a PHP web application framework intended to support a variety of relatively dissimilar websites under a common format. XRF Core contains common files that will be necessary for any XRF-based website, such as the global files, common function files, login and logout pages, as well as the user and admin panels.
@@ -12,7 +14,3 @@ Each module may contain code which is intended to be placed on the root of the s
 
 * PHP 5.6 or better
 * MySQL
-
-## License
-
-XRF Core is currently *not open source* and is copyright Jacob Weisz. Using this software without prior permission is prohibited. Code written by other authors within this project is usable as per the terms under which it was released.
